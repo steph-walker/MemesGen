@@ -60,7 +60,11 @@
 	// build out api call to get saved memes
 	// attach output to div id front-page-memes
 	// iterate results through div snippet 
-	
+	//     - GET https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved
+	$.get("https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved", function(data, status){
+            console.log("Data: " + data );
+    });
+
 })(jQuery);
 
 
@@ -93,6 +97,14 @@ var likeCounter = 0;
 $(".like").on("click", function(e){
   e.preventDefault();
   
+  // this function needs to initiate a post, update like
+  // clicking again could undo the like by sending same call with -1 payload
+
+  //     - GET https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_likes&meme_id=29562797
+  //  - POST https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_likes&meme_id=29562797
+  //      - Payload: { "likes": "+1" }
+  //      - Payload: {"likes":"-1"}
+
   // animation
   if( $(this).parent().hasClass("selected") ){
     $(this)
