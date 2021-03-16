@@ -56,16 +56,17 @@
 					target: $body,
 					visibleClass: 'navPanel-visible'
 				});
-	console.log('main page loaded');
 	// build out api call to get saved memes
 	// attach output to div id front-page-memes
 	// iterate results through div snippet 
 	//     - GET https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved
-	$.get("https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved", function(data, status){
-            console.log("Data: " + data );
-            $.each(data, function(i, item) {
-		    $( "#front-page-memes" ).append( '<div class="col-4 col-12-medium"> <section class="box feature" > <a href="chatPage.html" class="image featured"><img src="images/pic01.jpg" alt="" /></a><div class="inner"></div><ul class="list-inline action-menu"><li><a href="" class="like" ><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li></ul> </section></div>' );
-		  });
+	$.getJSON("https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved", function(data){
+            $.each(data.rows, function(i, item) {
+		console.log(data.rows[i]);
+		// this needs to be improved to add values from data.rows json object
+		// also need to make the ID available to the like click action
+	        $( "#front-page-memes" ).append( '<div class="col-4 col-12-medium"> <section class="box feature" > <a href="chatPage.html" class="image featured"><img src="' + data.rows[i].image_source + '" alt="" /></a><div class="inner"></div><ul class="list-inline action-menu"><li><a href="" class="like" ><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li></ul> </section></div>' );
+	    });
     });
 
 })(jQuery);
