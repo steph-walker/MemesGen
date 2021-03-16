@@ -111,6 +111,13 @@ function processMeme(memeInfo) {
         'selection:cleared': enableTextMethods,
     })
 
+    function uuid() {
+      const url = URL.createObjectURL(new Blob())
+      const [id] = url.toString().split('/').reverse()
+      URL.revokeObjectURL(url)
+      return id
+    }
+    
     $('#generate-meme').off('click').on('click', function () {
         var dataURL = canvas.toDataURL({
             format: 'png',
