@@ -63,6 +63,9 @@
 	//     - GET https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved
 	$.get("https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved", function(data, status){
             console.log("Data: " + data );
+            $.each(data, function(i, item) {
+		    $( "#front-page-memes" ).append( "<div class="col-4 col-12-medium"> <section class="box feature" > <a href="chatPage.html" class="image featured"><img src="images/pic01.jpg" alt="" /></a><div class="inner"></div><ul class="list-inline action-menu"><li><a href="" class="like" ><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li></ul> </section></div>" );
+		  });
     });
 
 })(jQuery);
