@@ -9,10 +9,10 @@ $(function () {
     // Get top 100 meme from imgflip api
     $.ajax({
         type: 'GET',
-        url: 'https://api.imgflip.com/get_memes',
+        url: 'https://makeopensourcegreatagain.com/memegen/api/?table_name=memegen',
         dataType: 'json',
         success: function (response) {
-            $.each(response.data.memes, function (i, meme) {
+            $.each(response.rows, function (i, meme) {
                 addPhoto(meme)
             })
 
