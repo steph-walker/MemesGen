@@ -129,7 +129,10 @@ function processMeme(memeInfo) {
         // build out full json payload and api post call
         // POST https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved
         // {"columns":[{"name":"uuid","value":"349a7920-6fb3-11eb-8ec8-3f9d12c7cc4e"},{"name":"sessionid","value":"349a7920-6fb3-11eb-8ec8-3f9d12c7cc4e"},{"name":"id","value":"161865971"},{"name":"bottomtext","value":"test"},{"name":"toptext","value":"test"},{"name":"name","value":"Marked Safe From"},{"name":"memename","value":"test"},{"name":"box_count","value":2},{"name":"url","value":"https://i.imgflip.com/2odckz.jpg"},{"name":"height","value":499},{"name":"width","value":618},{"name":"image_source","value":"test"}]}
-
+        var json_data = '{"columns":[{"name":"uuid","value":"349a7920-6fb3-11eb-8ec8-3f9d12c7cc4e"},{"name":"sessionid","value":"349a7920-6fb3-11eb-8ec8-3f9d12c7cc4e"},{"name":"id","value":"161865971"},{"name":"bottomtext","value":"test"},{"name":"toptext","value":"test"},{"name":"name","value":"Marked Safe From"},{"name":"memename","value":"test"},{"name":"box_count","value":2},{"name":"url","value":"https://i.imgflip.com/2odckz.jpg"},{"name":"height","value":499},{"name":"width","value":618},{"name":"image_source","value":"test"}]}';
+        $.post("https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved", json_data, function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
     })
 
   
