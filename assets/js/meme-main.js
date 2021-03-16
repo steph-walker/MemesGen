@@ -124,6 +124,13 @@ function processMeme(memeInfo) {
         document.body.removeChild(link);
     })
 
+    $('#save-meme').off('click').on('click', function () {
+        console.log('Save Meme clicked');
+        // build out full json payload and api post call
+        // POST https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved
+        // {"columns":[{"name":"uuid","value":"349a7920-6fb3-11eb-8ec8-3f9d12c7cc4e"},{"name":"sessionid","value":"349a7920-6fb3-11eb-8ec8-3f9d12c7cc4e"},{"name":"id","value":"161865971"},{"name":"bottomtext","value":"test"},{"name":"toptext","value":"test"},{"name":"name","value":"Marked Safe From"},{"name":"memename","value":"test"},{"name":"box_count","value":2},{"name":"url","value":"https://i.imgflip.com/2odckz.jpg"},{"name":"height","value":499},{"name":"width","value":618},{"name":"image_source","value":"test"}]}
+
+    })
 
   
 }

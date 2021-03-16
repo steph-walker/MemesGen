@@ -56,7 +56,11 @@
 					target: $body,
 					visibleClass: 'navPanel-visible'
 				});
-
+	console.log('main page loaded');
+	// build out api call to get saved memes
+	// attach output to div id front-page-memes
+	// iterate results through div snippet 
+	
 })(jQuery);
 
 
