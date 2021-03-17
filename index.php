@@ -16,14 +16,14 @@
 						<!-- Logo -->
 							<div id="logo">
 								<img src="./images/anthos.png" alt="anthos" style="height: 100px; width: 100px; margin-bottom: -.28em;">
-								<a href="index.html"><img src="./images/memesgen.png" alt="logo"></a>								
+								<a href="index.php"><img src="./images/memesgen.png" alt="logo"></a>								
 							</div>
 
 						<!-- Nav -->						
 							<nav  id="nav" >
 								<ul >
-									<li class="current"><a href="index.html">Top Memes</a></li>
-									<li><a href="Memes.html">Meme Templates</a></li>																	
+									<li class="current"><a href="index.php">Top Memes</a></li>
+									<li><a href="Memes.php">Meme Templates</a></li>																	
 								</ul>
 								<div class="cd-main-nav js-main-nav">
 									<ul class="cd-main-nav__list js-signin-modal-trigger">
