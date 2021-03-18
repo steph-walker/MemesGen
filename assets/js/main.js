@@ -61,11 +61,12 @@
 	// iterate results through div snippet 
 	//     - GET https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved
 	$.getJSON("https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved", function(data){
-            $.each(data.rows, function(i, item) {
-		console.log(data.rows[i]);
-		// this needs to be improved to add values from data.rows json object
-		// also need to make the ID available to the like click action
-	        $( "#front-page-memes" ).append( '<div class="col-4 col-12-medium"> <section class="box feature" > <a href="chatPage.html" class="image featured"><img src="' + data.rows[i].image_source + '" alt="" /></a><div class="inner"></div><ul class="list-inline action-menu"><li><a href="" class="like" ><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li></ul> </section></div>' );
+            $.each(data.data.memes_saved.values, function(i, item) {
+		console.log(data.data.memes_saved.values[i]);
+		// even with graphql, astra is only returning 2 rows.... 
+		// also need to make the ID available to the like click action for link attribute meme-id
+		data.data.memes_saved.values[i].likes = 0; // need to come from API 
+	        $( "#front-page-memes" ).append( '<div class="col-4 col-12-medium"> <section class="box feature" > <a href="chatPage.html" class="image featured"><img src="' + data.data.memes_saved.values[i].image_source + '" alt="" /></a><div class="inner"></div><ul class="list-inline action-menu"><li><a href="" class="like" meme-id="' + data.data.memes_saved.values[i].id + '"><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">' + data.data.memes_saved.values[i].likes + '</span></a></li></ul> </section></div>' );
 	    });
     });
 
@@ -108,6 +109,9 @@ $(".like").on("click", function(e){
   //  - POST https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_likes&meme_id=29562797
   //      - Payload: { "likes": "+1" }
   //      - Payload: {"likes":"-1"}
+
+  // id for this call is meme-id attribute on the like button
+  // like click even needs to be added after the main page loads results from api
 
   // animation
   if( $(this).parent().hasClass("selected") ){
