@@ -31,3 +31,18 @@ kubectl port-forward deployments/memegen-v2  1337:80
 kubectl exec -it deployments/memegen-v2 /bin/bash
 ```
 Docker [image](https://hub.docker.com/repository/docker/dsstevenmatison/memegen2).
+
+## Cluster should looke like
+```
+NAME                                                READY   STATUS      RESTARTS   AGE
+k8ssandra-reaper-operator-79fd5b4655-qvgls          1/1     Running     0          152m
+k8ssandra-cass-operator-7d5df6d49-pc5cj             1/1     Running     0          152m
+k8ssandra-grafana-5c6d5b8f5f-w67fw                  2/2     Running     0          152m
+k8ssandra-kube-prometheus-operator-85695ffb-6fpfl   1/1     Running     0          152m
+prometheus-k8ssandra-kube-prometheus-prometheus-0   2/2     Running     1          151m
+k8ssandra-dc1-default-sts-0                         2/2     Running     0          151m
+k8ssandra-reaper-schema-cqgm6                       0/1     Completed   0          148m
+k8ssandra-reaper-7bb77d575c-n9sv9                   1/1     Running     0          148m
+k8ssandra-dc1-stargate-646d6bcd68-d46rp             1/1     Running     0          152m
+memegen-v2-6fd6b955f6-v66xs                         1/1     Running     0          3m45s
+```
