@@ -47,7 +47,7 @@ Current Docker [image](https://hub.docker.com/repository/docker/dsstevenmatison/
 docker build . -t dsstevenmatison/memegen2
 docker push dsstevenmatison/memegen2
 ```
-4. Edit deployment.k8s.yaml accordingly
+4. Edit deployment.k8s.yaml accordingly then
 ```
 kubectl apply -f deployment.k8s.yaml
 ```
