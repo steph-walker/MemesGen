@@ -32,6 +32,20 @@ kubectl exec -it deployments/memegen-v2 /bin/bash
 ```
 Docker [image](https://hub.docker.com/repository/docker/dsstevenmatison/memegen2).
 
+## Create the own dockerhub image
+
+1. Git clone [this repo]
+2. Edit /api/common.php (enter username/password from above, enter k8s IP for stargate pod)
+3. Next build and push image
+```
+docker build . -t dsstevenmatison/memegen2
+docker push dsstevenmatison/memegen2
+```
+4. Edit deployment.k8s.yaml accordingly
+```
+kubectl apply -f deployment.k8s.yaml
+```
+
 ## Cluster should looke like
 ```
 NAME                                                READY   STATUS      RESTARTS   AGE
