@@ -8,18 +8,22 @@ watch kubectl get pods
 ```
 
 ## User and pass needed for app .env
+
 ```
 kubectl get secret k8ssandra-superuser -o jsonpath="{.data.username}" | base64 --decode ; echo
 kubectl get secret k8ssandra-superuser -o jsonpath="{.data.password}" | base64 --decode ; echo
 ```
 
-## Port forwarding for local testing
+## Port forwarding for local access
+
+```
 kubectl port-forward svc/k8ssandra-dc1-stargate-service 8080 8081 8082 9042
+```
 
 ## Use cqlsh to load memegen.cql statements
 
 ```
-./bin/cqlsh localhost 9042 -u [user above] -p [pass above]`
+./bin/cqlsh localhost 9042 -u [user above] -p [pass above]
 ```
 Get [cqlsh](https://downloads.datastax.com/#cqlsh).
 
@@ -30,9 +34,11 @@ kubectl apply -f deployment.k8s.yaml
 kubectl port-forward deployments/memegen-v2  1337:80
 kubectl exec -it deployments/memegen-v2 /bin/bash
 ```
-Docker [image](https://hub.docker.com/repository/docker/dsstevenmatison/memegen2).
+After port fwd access app @ [http://localhost:1337](http://localhost:1337).
 
 ## Create the own dockerhub image
+
+Current Docker [image](https://hub.docker.com/repository/docker/dsstevenmatison/memegen2). 
 
 1. Git clone [this repo]
 2. Edit /api/common.php (enter username/password from above, enter k8s IP for stargate pod)
@@ -46,7 +52,8 @@ docker push dsstevenmatison/memegen2
 kubectl apply -f deployment.k8s.yaml
 ```
 
-## Cluster should looke like
+## Cluster should look like
+
 ```
 NAME                                                READY   STATUS      RESTARTS   AGE
 k8ssandra-reaper-operator-79fd5b4655-qvgls          1/1     Running     0          152m
