@@ -36,7 +36,7 @@ kubectl exec -it deployments/memegen-v2 /bin/bash
 ```
 After port fwd access app @ [http://localhost:1337](http://localhost:1337).
 
-## Create the own dockerhub image
+## Create your own dockerhub image
 
 Current Docker [image](https://hub.docker.com/repository/docker/dsstevenmatison/memegen2). 
 
