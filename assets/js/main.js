@@ -60,7 +60,7 @@
 	// attach output to div id front-page-memes
 	// iterate results through div snippet 
 	//     - GET https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved
-	$.getJSON("https://makeopensourcegreatagain.com/memegen/api/?table_name=memes_saved", function(data){
+	$.getJSON("/api/?table_name=memes_saved", function(data){
             $.each(data.data.memes_saved.values, function(i, item) {
 		console.log(data.data.memes_saved.values[i]);
 		// even with graphql, astra is only returning 2 rows.... 

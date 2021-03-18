@@ -1,11 +1,12 @@
 <?php
 
+// move these to env vars
+
 // .env variables for credentials are also mapped in www.conf
-$ASTRA_DB_ID = getenv('ASTRA_DB_ID');
-$ASTRA_DB_REGION = getenv('ASTRA_DB_REGION');
-$ASTRA_DB_TOKEN = getenv('ASTRA_DB_TOKEN');
-$KEYSPACE = getenv('KEYSPACE');
-
-$ASTRA_URL = 'https://' . $ASTRA_DB_ID . '-' . $ASTRA_DB_REGION . '.apps.astra.datastax.com/api/rest';
-
+$KEYSPACE = 'memegen2';
+$K8S_USERNAME = 'k8ssandra-superuser';
+$K8S_PASSWORD = 'OydXi6iO4MEUUqODGAC3';
+$K8S_AUTH_URL = 'http://10.43.22.217:8081/v1/auth';
+$STARGATE_URL = 'http://10.43.22.217:8082/v2/';
+$GRAPHQL_URL = 'http://10.43.22.217:8080/graphql/';
 ?>
