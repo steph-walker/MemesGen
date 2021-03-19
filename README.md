@@ -31,10 +31,21 @@ Get [cqlsh](https://downloads.datastax.com/#cqlsh).
 
 ```
 kubectl apply -f deployment.k8s.yaml
+```
+
+## Access app locally
+
+```
 kubectl port-forward deployments/memegen-v2  1337:80
-kubectl exec -it deployments/memegen-v2 /bin/bash
 ```
 After port fwd access app @ [http://localhost:1337](http://localhost:1337).
+
+## Connect to app container
+
+```
+kubectl exec -it deployments/memegen-v2 /bin/bash
+```
+:bulb: Use the command <b></i>tail -f /var/log/php5-fpm.log</i></b> to check PHP Errors.  You can also find the app source at <b></i>/usr/share/nginx/html</i></b>.
 
 ## Create your own dockerhub image
 
@@ -47,10 +58,16 @@ Current Docker [image](https://hub.docker.com/repository/docker/dsstevenmatison/
 docker build . -t dsstevenmatison/memegen2
 docker push dsstevenmatison/memegen2
 ```
+:warning: this sample above is mine, you would change to dockerhubrepo/appname.  Then in the yaml file you reference the full docker.io string to image.  For example: <b></i>docker.io/dsstevenmatison/memegen2:latest</i></b> 
 4. Edit deployment.k8s.yaml accordingly then
 ```
 kubectl apply -f deployment.k8s.yaml
 ```
+5. If you are just updating the image, murder the pod and it will recreate w/ new image
+```
+kubectl delete pod memegen-v2-6fd6b955f6-6ldk5
+```
+:bulb: Monitor your <b></i>watch kubectl get pods</i></b> terminal and watch this pod terminate and recreate!!!
 
 ## Cluster should look like
 

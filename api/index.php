@@ -7,7 +7,7 @@
 // GET	Meme Likes			/api/?table_name=memes_likes&meme_id=[id]
 // POST	Meme Likes			/api/?table_name=memes_likes&meme_id=[id] + json raw payloads { "likes": "+1" } or { "likes": "-1" } 
 
-// migrating to graphQL endpoints done but still need to test and link up memes_likes
+// migrating to graphQL endpoints done but still need to test and link up memes_likes to jquery
 
 $allowed_tables = array('memegen','memes_saved','memes_likes');
 
@@ -28,7 +28,7 @@ $meme_id = $_GET['meme_id'];
 if($_SERVER['REQUEST_METHOD']=="POST") {
 	$data_json = file_get_contents('php://input');
 	$request = curl_init();
-	$url = 'http://10.43.22.217:8082/v2/keyspaces/' . $KEYSPACE . '/' . $table_name . '/' . $meme_id;
+	$url = $STARGATE_URL . '/v2/keyspaces/' . $KEYSPACE . '/' . $table_name . '/' . $meme_id;
 	curl_setopt($request, CURLOPT_URL, $url);
 	curl_setopt($request, CURLOPT_HTTPHEADER, array('X-Cassandra-Token: ' . $auth_token, 'Content-Type: application/json','Content-Length: ' . strlen($data_json)));
 	curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'PUT');
@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
 	echo $response;
 }
 else { 
-	$url = 'http://10.43.22.217:8082/v1/keyspaces/' . $KEYSPACE . '/tables/' . $table_name . '/rows/' . $meme_id;
+	$url = $STARGATE_URL . '/v2/keyspaces/' . $KEYSPACE . '/' . $table_name . '/' . $meme_id;
 	$request = curl_init($url);
 	curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($request, CURLOPT_HTTPHEADER, array(
@@ -53,48 +53,51 @@ else {
 
 } else if (isset($_GET['table_name']) && $_GET['table_name']=='memes_saved' && $_SERVER['REQUEST_METHOD']=="GET") {
 	$table_name = $_GET['table_name'];
-	// need to fix url from common/env
-	$url = 'http://10.43.22.217:8080/graphql/'. $KEYSPACE;
+	$url = $GRAPHQL_URL . $KEYSPACE;
 	$data_json = '{"query":"query memesSaved{memes_saved(value:{}){values{id image_source}}}","variables":{}}';
 	$request = curl_init();
 	curl_setopt($request, CURLOPT_URL, $url);
-    curl_setopt($request, CURLOPT_HTTPHEADER, array('X-Cassandra-Token: ' . $auth_token, 'Content-Type: application/json'));
-    curl_setopt($request, CURLOPT_POST, 1);
-    curl_setopt($request, CURLOPT_POSTFIELDS,$data_json);
-    curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($request, CURLOPT_FOLLOWLOCATION, 1);
-    $response  = curl_exec($request);
-    curl_close($request);
-    echo $response;
+	curl_setopt($request, CURLOPT_HTTPHEADER, array('X-Cassandra-Token: ' . $auth_token, 'Content-Type: application/json'));
+	curl_setopt($request, CURLOPT_POST, 1);
+	curl_setopt($request, CURLOPT_POSTFIELDS,$data_json);
+	curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($request, CURLOPT_FOLLOWLOCATION, 1);
+	$response  = curl_exec($request);
+	curl_close($request);
+	echo $response;
 } else if (isset($_GET['table_name']) && $_GET['table_name']=='memes_saved' && $_SERVER['REQUEST_METHOD']=="POST") {
 	$table_name = $_GET['table_name'];
-	// need to fix url from common/env
-	$url = 'http://10.43.22.217:8082/v1/keyspaces/' . $KEYSPACE . '/tables/' . $table_name . '/rows';
+	// this one has to be a /v1/ url because /v2/ is a 500
+	$url = $STARGATE_URL . '/v2/keyspaces/' . $KEYSPACE . '/' . $table_name;
+	// this url works
+	//$url = 'http://10.43.22.217:8082/v1/keyspaces/' . $KEYSPACE . '/tables/' . $table_name . '/rows';
+	// testing without IP
+	$url = $STARGATE_URL . '/v1/keyspaces/' . $KEYSPACE . '/tables/' . $table_name . '/rows';
 	$data_json = file_get_contents('php://input');
 	$request = curl_init();
 	curl_setopt($request, CURLOPT_URL, $url);
-    curl_setopt($request, CURLOPT_HTTPHEADER, array('X-Cassandra-Token: ' . $auth_token, 'Content-Type: application/json'));
-    curl_setopt($request, CURLOPT_POST, 1);
-    curl_setopt($request, CURLOPT_POSTFIELDS,$data_json);
-    curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($request, CURLOPT_FOLLOWLOCATION, 1);
-    $response  = curl_exec($request);
-    curl_close($request);
-    echo $response;
+	curl_setopt($request, CURLOPT_HTTPHEADER, array('X-Cassandra-Token: ' . $auth_token, 'Content-Type: application/json'));
+	curl_setopt($request, CURLOPT_POST, 1);
+	curl_setopt($request, CURLOPT_POSTFIELDS,$data_json);
+	curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($request, CURLOPT_FOLLOWLOCATION, 1);
+	$response  = curl_exec($request);
+	curl_close($request);
+	echo $response;
 } else if(isset($_GET['table_name']) && $_GET['table_name']=='memegen') {
 	//$table_name = $_GET['table_name'];
-	$url = 'http://10.43.22.217:8080/graphql/'. $KEYSPACE;
+	$url = $GRAPHQL_URL . $KEYSPACE;
 	$data_json = '{"query":"query memegenerator{memegen(value:{}){values{id name url width height box_count}}}","variables":{}}';
 	$request = curl_init();
 	curl_setopt($request, CURLOPT_URL, $url);
-    curl_setopt($request, CURLOPT_HTTPHEADER, array('X-Cassandra-Token: ' . $auth_token, 'Content-Type: application/json'));
-    curl_setopt($request, CURLOPT_POST, 1);
-    curl_setopt($request, CURLOPT_POSTFIELDS,$data_json);
-    curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($request, CURLOPT_FOLLOWLOCATION, 1);
-    $response  = curl_exec($request);
-    curl_close($request);
-    echo $response;
+	curl_setopt($request, CURLOPT_HTTPHEADER, array('X-Cassandra-Token: ' . $auth_token, 'Content-Type: application/json'));
+	curl_setopt($request, CURLOPT_POST, 1);
+	curl_setopt($request, CURLOPT_POSTFIELDS,$data_json);
+	curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($request, CURLOPT_FOLLOWLOCATION, 1);
+	$response  = curl_exec($request);
+	curl_close($request);
+	echo $response;
 } else {
 	echo "nothing to see here"; 
 }
