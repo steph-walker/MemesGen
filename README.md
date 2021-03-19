@@ -7,7 +7,7 @@ helm install -f k8ssandra.yaml k8ssandra k8ssandra/k8ssandra
 watch kubectl get pods
 ```
 
-## User and pass needed for app .env
+## User and pass needed for local testing
 
 ```
 kubectl get secret k8ssandra-superuser -o jsonpath="{.data.username}" | base64 --decode ; echo
@@ -52,18 +52,17 @@ kubectl exec -it deployments/memegen-v2 /bin/bash
 Current Docker [image](https://hub.docker.com/repository/docker/dsstevenmatison/memegen2). 
 
 1. Git clone [this repo]
-2. Edit /api/common.php (enter username/password from above, enter k8s IP for stargate pod)
-3. Next build and push image
+2. Next build and push image
 ```
 docker build . -t dsstevenmatison/memegen2
 docker push dsstevenmatison/memegen2
 ```
 :warning: This sample above is mine, you would change to your dockerhubrepo/appname.  Then in the deployment.k8s.yaml file you reference the full docker.io string to image.  For example: <b></i>docker.io/dsstevenmatison/memegen2:latest</i></b>.
-4. Edit deployment.k8s.yaml accordingly then
+3. Edit deployment.k8s.yaml accordingly then
 ```
 kubectl apply -f deployment.k8s.yaml
 ```
-5. If you are just updating the image, murder the pod and it will recreate w/ new image
+4. If you are just updating the image, murder the pod and it will recreate w/ new image
 ```
 kubectl delete pod memegen-v2-6fd6b955f6-6ldk5
 ```
