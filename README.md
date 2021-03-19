@@ -58,7 +58,7 @@ Current Docker [image](https://hub.docker.com/repository/docker/dsstevenmatison/
 docker build . -t dsstevenmatison/memegen2
 docker push dsstevenmatison/memegen2
 ```
-:warning: this sample above is mine, you would change to dockerhubrepo/appname.  Then in the yaml file you reference the full docker.io string to image.  For example: <b></i>docker.io/dsstevenmatison/memegen2:latest</i></b> 
+:warning: This sample above is mine, you would change to your dockerhubrepo/appname.  Then in the deployment.k8s.yaml file you reference the full docker.io string to image.  For example: <b></i>docker.io/dsstevenmatison/memegen2:latest</i></b>.
 4. Edit deployment.k8s.yaml accordingly then
 ```
 kubectl apply -f deployment.k8s.yaml
