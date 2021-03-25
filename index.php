@@ -16,14 +16,14 @@
 						<!-- Logo -->
 							<div id="logo">
 								<img src="./images/anthos.png" alt="anthos" style="height: 100px; width: 100px; margin-bottom: -.28em;">
-								<a href="index.html"><img src="./images/memesgen.png" alt="logo"></a>								
+								<a href="index.php"><img src="./images/memesgen.png" alt="logo"></a>								
 							</div>
 
 						<!-- Nav -->						
 							<nav  id="nav" >
 								<ul >
-									<li class="current"><a href="index.html">Top Memes</a></li>
-									<li><a href="Memes.html">Meme Templates</a></li>																	
+									<li class="current"><a href="index.php">Top Memes</a></li>
+									<li><a href="Memes.php">Meme Templates</a></li>																	
 								</ul>
 								<div class="cd-main-nav js-main-nav">
 									<ul class="cd-main-nav__list js-signin-modal-trigger">
@@ -141,142 +141,8 @@
 							<button>New</button>
 						</div>
 						<div class="row">
-							
-							<div class="col-4 col-12-medium">
-
-								<!-- Box -->
-									<section class="box feature" >
-										<a href="chatPage.html" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-										<div class="inner">
-										
-										</div>
-										<ul class="list-inline action-menu">
-											<li><a href="" class="like" ><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li>
-											
-										  </ul>
-									</section>
-
-							</div>
-							<div class="col-4 col-12-medium">
-
-								<!-- Box -->
-									<section class="box feature">
-										<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-										<div class="inner">
-										
-										</div>
-										<ul class="list-inline action-menu">
-											<li><a href="" class="like" ><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li>
-											
-										  </ul>
-									</section>
-
-							</div>
-							<div class="col-4 col-12-medium">
-
-								<!-- Box -->
-									<section class="box feature">
-										<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-										<div class="inner">
-											
-											
-										</div>
-										<ul class="list-inline action-menu">
-											<li><a href="" class="like"><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li>
-											
-										  </ul>
-									</section>
-
-							</div>
-							<div class="col-4 col-12-medium">
-
-								<!-- Box -->
-									<section class="box feature">
-										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-										<div class="inner">
-											
-										</div>
-										<ul class="list-inline action-menu">
-											<li><a href="" class="like"><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li>
-											
-										  </ul>
-									</section>
-
-							</div>
-							<div class="col-4 col-12-medium">
-
-								<!-- Box -->
-									<section class="box feature">
-										<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-										<div class="inner">
-										
-										</div>
-										<ul class="list-inline action-menu">
-											<li><a href="" class="like"><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li>
-											
-										  </ul>
-									</section>
-
-							</div>
-							<div class="col-4 col-12-medium">
-
-								<!-- Box -->
-									<section class="box feature">
-										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-										<div class="inner">
-											
-										</div>
-										<ul class="list-inline action-menu">
-											<li><a href="" class="like"><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li>
-											
-										  </ul>
-									</section>
-
-							</div>
-							<div class="col-4 col-12-medium">
-
-								<!-- Box -->
-									<section class="box feature">
-										<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-										<div class="inner">
-									
-										</div>
-										<ul class="list-inline action-menu">
-											<li><a href="" class="like"><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li>
-											
-										  </ul>
-									</section>
-
-							</div>
-							<div class="col-4 col-12-medium">
-
-								<!-- Box -->
-									<section class="box feature">
-										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-										<div class="inner">
-										
-										</div>
-										<ul class="list-inline action-menu">
-											<li><a href="" class="like"><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li>
-											
-										  </ul>
-									</section>
-
-							</div>
-							<div class="col-4 col-12-medium">
-
-								<!-- Box -->
-									<section class="box feature">
-										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-										<div class="inner">
-											
-										</div>
-										<ul class="list-inline action-menu">
-											<li><a href="" class="like"><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">0</span></a></li>
-											
-										  </ul>
-									</section>
-
+							<div id="front-page-memes">
+								
 							</div>
 						</div>
 					</div>

@@ -111,6 +111,13 @@ function processMeme(memeInfo) {
         'selection:cleared': enableTextMethods,
     })
 
+    function uuid() {
+      const url = URL.createObjectURL(new Blob())
+      const [id] = url.toString().split('/').reverse()
+      URL.revokeObjectURL(url)
+      return id
+    }
+    
     $('#generate-meme').off('click').on('click', function () {
         var dataURL = canvas.toDataURL({
             format: 'png',
@@ -122,8 +129,23 @@ function processMeme(memeInfo) {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+
+    // need to get right values for uuid, sessionid and original meme data object values
+    // maybe need to adjust api and data model as version2 has more UI features
+    //  value for id needs to come from button attribute meme-id
+    // do we even care about rest of the payload?
+    var json_data = '{"columns":[{"name":"uuid","value":"'+ uuid() +'"},{"name":"sessionid","value":"349a7920-6fb3-11eb-8ec8-3f9d12c7cc4e"},{"name":"id","value":"161865971"},{"name":"bottomtext","value":"test"},{"name":"toptext","value":"test"},{"name":"name","value":"Marked Safe From"},{"name":"memename","value":"test"},{"name":"box_count","value":2},{"name":"url","value":"https://i.imgflip.com/2odckz.jpg"},{"name":"height","value":499},{"name":"width","value":618},{"name":"image_source","value":"' + dataURL + '"}]}';
+
+        $.post("/api/?table_name=memes_saved", json_data, function(data, status){
+            console.log("Data: " + data + "\nStatus: " + status);
+        });
     })
 
+
+    $('#save-meme').off('click').on('click', function () {
+        // this click function and generate function may need to be combined into single button (save on generate)
+        console.log('save-meme clicked');
+    })
 
   
 }
