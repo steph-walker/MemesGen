@@ -132,9 +132,9 @@ CREATE INDEX memes_saved_id_idx ON memes_saved (id);
 
 DROP TABLE IF EXISTS memes_likes;
 CREATE TABLE IF NOT EXISTS memes_likes (
-	id text,
+	uuid uuid,
 	likes counter,
-  	PRIMARY KEY (id)
+  	PRIMARY KEY (uuid)
 );
 
 

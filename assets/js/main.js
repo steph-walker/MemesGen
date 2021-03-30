@@ -63,10 +63,12 @@
 	$.getJSON("/api/?table_name=memes_saved", function(data){
             $.each(data.data.memes_saved.values, function(i, item) {
 		console.log(data.data.memes_saved.values[i]);
+		console.log(data.data.memes_likes.values[i]);
 		// even with graphql, astra is only returning 2 rows.... 
 		// also need to make the ID available to the like click action for link attribute meme-id
-		data.data.memes_saved.values[i].likes = 0; // need to come from API 
-	        $( "#front-page-memes" ).append( '<div class="col-4 col-12-medium"> <section class="box feature" > <a href="chatPage.html" class="image featured"><img src="' + data.data.memes_saved.values[i].image_source + '" alt="" /></a><div class="inner"></div><ul class="list-inline action-menu"><li><a href="" class="like" meme-id="' + data.data.memes_saved.values[i].id + '"><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">' + data.data.memes_saved.values[i].likes + '</span></a></li></ul> </section></div>' );
+		data.data.memes_saved.values[i].likes = data.data.memes_likes.values[i].likes; // need to come from API 
+
+	        $( "#front-page-memes" ).append( '<div class="col-4 col-12-medium"> <section class="box feature" > <a href="chatPage.html" class="image featured"><img src="' + data.data.memes_saved.values[i].image_source + '" alt="" /></a><div class="inner"></div><ul class="list-inline action-menu"><li><a href="" class="like" meme-id="' + data.data.memes_saved.values[i].uuid + '"><span class="fa fa-thumbs-up"></span> <span class="menulabel">Like</span> <span class="counter">' + data.data.memes_likes.values[i].likes + '</span></a></li></ul> </section></div>' );
 	    });
     });
 
@@ -111,7 +113,12 @@ $(".like").on("click", function(e){
   //      - Payload: {"likes":"-1"}
 
   // id for this call is meme-id attribute on the like button
-  // like click even needs to be added after the main page loads results from api
+  // like click even needs to be added after the main page loads results from api (click action not associated to elements loaded after page load)
+
+	var json_data = '{ "likes": "+1" }';
+	$.post("/api/?table_name=memes_likes", json_data, function(data, status){
+	    console.log("Data: " + data + "\nStatus: " + status);
+	});
 
   // animation
   if( $(this).parent().hasClass("selected") ){
