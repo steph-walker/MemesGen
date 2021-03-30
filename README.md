@@ -23,9 +23,8 @@ kubectl port-forward svc/k8ssandra-dc1-stargate-service 8080 8081 8082 9042
 ## Use cqlsh to load memegen.cql statements
 
 ```
-./bin/cqlsh localhost 9042 -u [user above] -p [pass above]
+kubectl exec -it k8ssandra-dc1-default-sts-0 -- bash -c "wget https://raw.githubusercontent.com/ds-steven-matison/MemesGen/master/memegen.cql -P /tmp && /opt/cassandra/bin/cqlsh localhost 9042 -u k8ssandra-superuser -p [pass above] -f /tmp/memegen.cql"
 ```
-Get [cqlsh](https://downloads.datastax.com/#cqlsh).
 
 ## Role out app 
 
