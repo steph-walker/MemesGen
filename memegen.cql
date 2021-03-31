@@ -1,5 +1,5 @@
 CREATE KEYSPACE memegen2  WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
-
+USE memegen2;
 
 DROP TABLE IF EXISTS memegen;
 CREATE TABLE IF NOT EXISTS memegen (
@@ -112,7 +112,6 @@ INSERT INTO memegen(id,name,url,width,height,box_count) VALUES('71428573','Say i
 INSERT INTO memegen(id,name,url,width,height,box_count) VALUES('56225174','Be Like Bill','https://i.imgflip.com/xh3me.jpg',913,907,4);
 INSERT INTO memegen(id,name,url,width,height,box_count) VALUES('922147','Laughing Men In Suits','https://i.imgflip.com/jrj7.jpg',500,333,2);
 
-
 DROP TABLE IF EXISTS memes_saved;
 CREATE TABLE IF NOT EXISTS memes_saved (
     uuid uuid,
@@ -133,9 +132,9 @@ CREATE INDEX memes_saved_id_idx ON memes_saved (id);
 
 DROP TABLE IF EXISTS memes_likes;
 CREATE TABLE IF NOT EXISTS memes_likes (
-	id text,
+	uuid uuid,
 	likes counter,
-  	PRIMARY KEY (id)
+  	PRIMARY KEY (uuid)
 );
 
 

@@ -4,8 +4,8 @@
 // GET	Meme Templates			/api/?table_name=memegen
 // GET	Saved Memes			/api/?table_name=memes_saved
 // POST	Saved Memes			/api/?table_name=memes_saved + json raw payload {"columns":[{"name":"uuid","value":"349a7920-6fb3-11eb-8ec8-3f9d12c7cc4e"},{"name":"sessionid","value":"349a7920-6fb3-11eb-8ec8-3f9d12c7cc4e"},{"name":"id","value":"161865971"},{"name":"bottomtext","value":"test"},{"name":"toptext","value":"test"},{"name":"name","value":"Marked Safe From"},{"name":"memename","value":"test"},{"name":"box_count","value":2},{"name":"url","value":"https://i.imgflip.com/2odckz.jpg"},{"name":"height","value":499},{"name":"width","value":618},{"name":"image_source","value":"test"}]}
-// GET	Meme Likes			/api/?table_name=memes_likes&meme_id=[id]
-// POST	Meme Likes			/api/?table_name=memes_likes&meme_id=[id] + json raw payloads { "likes": "+1" } or { "likes": "-1" } 
+// GET	Meme Likes			/api/?table_name=memes_likes&meme_id=[uuid]
+// POST	Meme Likes			/api/?table_name=memes_likes&meme_id=[uuid] + json raw payloads { "likes": "+1" } or { "likes": "-1" } 
 
 // migrating to graphQL endpoints done but still need to test and link up memes_likes to jquery
 
@@ -54,7 +54,7 @@ else {
 } else if (isset($_GET['table_name']) && $_GET['table_name']=='memes_saved' && $_SERVER['REQUEST_METHOD']=="GET") {
 	$table_name = $_GET['table_name'];
 	$url = $GRAPHQL_URL . $KEYSPACE;
-	$data_json = '{"query":"query memesSaved{memes_saved(value:{}){values{id image_source}}}","variables":{}}';
+	$data_json = '{"query":"query memesSaved{memes_saved(value:{}){values{uuid image_source}},memes_likes(value:{}){values{uuid likes}}}"}';
 	$request = curl_init();
 	curl_setopt($request, CURLOPT_URL, $url);
 	curl_setopt($request, CURLOPT_HTTPHEADER, array('X-Cassandra-Token: ' . $auth_token, 'Content-Type: application/json'));
@@ -69,9 +69,7 @@ else {
 	$table_name = $_GET['table_name'];
 	// this one has to be a /v1/ url because /v2/ is a 500
 	$url = $STARGATE_URL . '/v2/keyspaces/' . $KEYSPACE . '/' . $table_name;
-	// this url works
-	//$url = 'http://10.43.22.217:8082/v1/keyspaces/' . $KEYSPACE . '/tables/' . $table_name . '/rows';
-	// testing without IP
+	// this url works (v1)
 	$url = $STARGATE_URL . '/v1/keyspaces/' . $KEYSPACE . '/tables/' . $table_name . '/rows';
 	$data_json = file_get_contents('php://input');
 	$request = curl_init();
@@ -87,7 +85,7 @@ else {
 } else if(isset($_GET['table_name']) && $_GET['table_name']=='memegen') {
 	//$table_name = $_GET['table_name'];
 	$url = $GRAPHQL_URL . $KEYSPACE;
-	$data_json = '{"query":"query memegenerator{memegen(value:{}){values{id name url width height box_count}}}","variables":{}}';
+	$data_json = '{"query":"query memegenerator{memegen(value:{}){values{id name url width height box_count}}}"}';
 	$request = curl_init();
 	curl_setopt($request, CURLOPT_URL, $url);
 	curl_setopt($request, CURLOPT_HTTPHEADER, array('X-Cassandra-Token: ' . $auth_token, 'Content-Type: application/json'));
