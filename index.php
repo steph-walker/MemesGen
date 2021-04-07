@@ -54,9 +54,7 @@
 				</div>
 
 			<!-- Main -->
-				<div id="main-wrapper">
-					<h1>Main body</h1>
-				</div>
+				
 
 			<!-- Footer -->
 				<div id="footer-wrapper">
